@@ -27,11 +27,13 @@ class Home extends Component {
       let data = JSON.parse(message.data);
       console.log('data = ', data)
       if (data.message) {
+        console.log('DATA.MESSAGE = ', data.message);
         var joinedPackets = this.state.packets.concat(data.message);
-
+        var joinedAlerts = this.state.alerts.concat(data.message.alerts);
         this.setState({
           message: data.message,
-          packets: joinedPackets
+          packets: joinedPackets,
+          alerts: joinedAlerts
         });
       }
       if (data.hasOwnProperty('notify') && this.state.notify !== data.notify) {
@@ -76,7 +78,7 @@ class Home extends Component {
       <div className="box">
         <Nav2 startSniffer={this.sendStartCommand} stopSniffer={this.sendStopCommand}/>
         <div style={{marginTop: '100px'}}></div>
-        <Alerts />
+        <Alerts alerts={this.state.alerts}/>
         {/* <section id="about">
           <div className="container">
             <div className="row">

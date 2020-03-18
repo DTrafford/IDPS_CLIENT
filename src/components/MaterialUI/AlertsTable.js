@@ -23,8 +23,8 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 // function createData(srcIP) {
 //   return {srcIP};
 // }
-function createData(srcIP, srcCountry, dstIP, dstCountry, time, srcPort, dstPort) {
-  return {srcIP, srcCountry, dstIP, dstCountry, time, srcPort, dstPort};
+function createData(time, pckNum, msg, srcIP, srcPort, dstIP, dstPort) {
+  return {time, pckNum, msg, srcIP, srcPort, dstIP, dstPort};
 }
 
 // const rows = [
@@ -68,12 +68,12 @@ function getSorting(order, orderBy) {
 }
 
 const headCells = [
-  { id: 'srcIP', numeric: false, disablePadding: false, label: 'Src IP' },
-  { id: 'srcCountry', numeric: false, disablePadding: false, label: 'Src Country' },
-  { id: 'dstIp', numeric: false, disablePadding: false, label: 'Dest IP' },
-  { id: 'dstCountry', numeric: false, disablePadding: false, label: 'Dst Country' },
   { id: 'time', numeric: false, disablePadding: false, label: 'Time' },
+  { id: 'pckNum', numeric: false, disablePadding: false, label: 'Pckt #'},
+  { id: 'message', numeric: false, disablePadding: false, label: 'Message' },
+  { id: 'srcIP', numeric: false, disablePadding: false, label: 'Src IP' },
   { id: 'srcPort', numeric: false, disablePadding: false, label: 'Src Port' },
+  { id: 'dstIp', numeric: false, disablePadding: false, label: 'Dest IP' },
   { id: 'dstPort', numeric: false, disablePadding: false, label: 'Dst Port' },
   // { id: 'flags', numeric: false, disablePadding: false, label: 'Flags' },
 ];
@@ -92,7 +92,7 @@ function EnhancedTableHead(props) {
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={numSelected === rowCount}
             onChange={onSelectAllClick}
-            inputProps={{ 'aria-label': 'select all desserts' }}
+            inputProps={{ 'aria-label': 'select all alerts' }}
           />
         </TableCell>
         {headCells.map(headCell => (
@@ -231,9 +231,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function AlertsTable(props) {
-  if(props.Alert[0]) {
-    console.log(props.Alert[0].pckt_src);
-  }
   
   const rows = [
     // createData('Cupcake', 305, 3.7, 67, 4.3),
@@ -251,10 +248,8 @@ export default function AlertsTable(props) {
     // createData('Oreo', 437, 18.0, 63, 4.0),
   ];
 
-  props.Alert.map((pckt) => {
-    let srcCountry = pckt.srcCountry ? pckt.srcCountry : 'Unknown';
-    let dstCountry = pckt.dstCountry ? pckt.dstCountry : 'Unknown';
-    rows.push(createData(pckt.srcIP, srcCountry, pckt.dstIP, dstCountry, pckt.time, pckt.srcPort, pckt.dstPort))
+  props.alerts.map((alert) => {
+    rows.push(createData(alert.time, alert.pckNum, alert.msg, alert.srcIP, alert.srcPort, alert.dstIP, alert.dstPort))
   })
   // console.log('ROWS = ', rows);
   const classes = useStyles();
@@ -325,7 +320,7 @@ export default function AlertsTable(props) {
           <Table
             className={classes.table}
             aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
+            size='small'
             stickyHeader
           >
             <EnhancedTableHead
@@ -347,11 +342,11 @@ export default function AlertsTable(props) {
                   return (
                     <TableRow
                       hover
-                      onClick={event => handleClick(event, row.srcIP)}
+                      onClick={event => handleClick(event, index)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.name}
+                      key={row.nam}
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
@@ -361,13 +356,13 @@ export default function AlertsTable(props) {
                         />
                       </TableCell>
                       <TableCell component="th" id={labelId} scope="row" padding="none">
-                        {row.srcIP}
+                        {row.time}
                       </TableCell>
-                      <TableCell align="left">{row.srcCountry}</TableCell>
-                      <TableCell align="left">{row.dstIP}</TableCell>
-                      <TableCell align="left">{row.dstCountry}</TableCell>
-                      <TableCell align="left">{row.time}</TableCell>
+                      <TableCell align="left">{row.pckNum}</TableCell>
+                      <TableCell align="left">{row.msg}</TableCell>
+                      <TableCell align="left">{row.srcIP}</TableCell>
                       <TableCell align="left">{row.srcPort}</TableCell>
+                      <TableCell align="left">{row.dstIP}</TableCell>
                       <TableCell align="left">{row.dstPort}</TableCell>
                     </TableRow>
                   );

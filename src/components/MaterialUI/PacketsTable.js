@@ -23,8 +23,9 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 // function createData(srcIP) {
 //   return {srcIP};
 // }
-function createData(srcIP, srcPort, dstIP, dstPort, time, proto, flags) {
-  return {srcIP, srcPort, dstIP, dstPort, time, proto, flags};
+function createData(pcktNumber, srcIP, srcPort, dstIP, dstPort, time, proto, flags) {
+  const flg = flags ? flags : '-------'
+  return {pcktNumber, srcIP, srcPort, dstIP, dstPort, time, proto, flg};
 }
 
 function desc(a, b, orderBy) {
@@ -218,9 +219,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function PacketsTable(props) {
-  if(props.packets[0]) {
-    console.log(props.packets[0].pckt_src);
-  }
   
   const rows = [
     // createData('Cupcake', 305, 3.7, 67, 4.3),
@@ -239,9 +237,7 @@ export default function PacketsTable(props) {
   ];
 
   props.packets.map((pckt) => {
-    let srcCountry = pckt.srcCountry ? pckt.srcCountry : 'Unknown';
-    let dstCountry = pckt.dstCountry ? pckt.dstCountry : 'Unknown';
-    rows.push(createData(pckt.srcIP, pckt.srcPort, pckt.dstIP, pckt.dstPort, pckt.time, pckt.proto, pckt.flags))
+    rows.push(createData(pckt.pcktNumber, pckt.srcIP, pckt.srcPort, pckt.dstIP, pckt.dstPort, pckt.time, pckt.protocol, pckt.flags));
   })
   // console.log('ROWS = ', rows);
   const classes = useStyles();
@@ -357,14 +353,15 @@ export default function PacketsTable(props) {
                         />
                       </TableCell>
                       <TableCell component="th" id={labelId} scope="row" padding="none">
-                        {row.srcIP}
+                        {row.pcktNumber}
                       </TableCell>
-                      <TableCell align="left">{row.srcCountry}</TableCell>
-                      <TableCell align="left">{row.dstIP}</TableCell>
-                      <TableCell align="left">{row.dstCountry}</TableCell>
-                      <TableCell align="left">{row.time}</TableCell>
+                      <TableCell align="left">{row.srcIP}</TableCell>
                       <TableCell align="left">{row.srcPort}</TableCell>
+                      <TableCell align="left">{row.dstIP}</TableCell>
                       <TableCell align="left">{row.dstPort}</TableCell>
+                      <TableCell align="left">{row.time}</TableCell>
+                      <TableCell align="left">{row.proto}</TableCell>
+                      <TableCell align="left">{row.flags}</TableCell>
                     </TableRow>
                   );
                 })}

@@ -10,13 +10,17 @@ export default class Alerts extends Component {
             ]
         }
     }
+
+    componentWillUpdate() {
+        console.log(this.props.alerts);
+    }
     render() {
         return (
             <div>
                 <h2 style={{paddingLeft: '20px'}}>Alerts</h2>
-                {this.state.alerts.length === 0  ? <h2 style={{paddingLeft: '20px'}}>No Current Alerts</h2> 
+                {this.props.alerts.length === 0  ? <h2 style={{paddingLeft: '20px'}}>No Current Alerts</h2> 
                 : 
-                <AlertsTable />
+                <AlertsTable alerts={this.props.alerts}/>
                 }
             </div>
         )
