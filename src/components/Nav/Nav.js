@@ -1,12 +1,14 @@
-import React, { Component } from 'react';
-import './Nav.css'
-// const client = new W3CWebSocket('ws://localhost:8000/ws/idps/');
+import React, { Component } from "react";
+import "./Nav.css";
 
 export default class Nav extends Component {
   render() {
     return (
       <span>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+        <nav
+          className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
+          id="mainNav"
+        >
           <div className="container">
             <a className="navbar-brand js-scroll-trigger" href="#page-top">
               <span className="headerName">JIT -IDPS</span>
@@ -25,36 +27,48 @@ export default class Nav extends Component {
             <div className="collapse navbar-collapse" id="navbarResponsive">
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  {/* <a className="nav-link js-scroll-trigger" href="#about">
+                  <button
+                    type="button"
+                    class="btn btn-outline-info buttonClass"
+                  >
                     ABOUT
-                  </a> */}
-                  <button type="button" class="btn btn-outline-info buttonClass">ABOUT</button>
+                  </button>
                 </li>
                 <li className="nav-item">
-                  {/* <a className="nav-link js-scroll-trigger" href="#services">
+                  <button
+                    type="button"
+                    class="btn btn-outline-success buttonClass"
+                    onClick={this.props.startSniffer}
+                  >
                     START
-                  </a> */}
-                  <button type="button" class="btn btn-outline-success buttonClass" onClick={this.props.startSniffer}>START</button>
+                  </button>
                 </li>
                 <li className="nav-item">
-                  {/* <a className="nav-link js-scroll-trigger" href="#contact">
+                  <button
+                    type="button"
+                    class="btn btn-outline-danger buttonClass"
+                  >
                     STOP
-                  </a> */}
-                  <button type="button" class="btn btn-outline-danger buttonClass">STOP</button>
+                  </button>
                 </li>
               </ul>
             </div>
           </div>
         </nav>
-  
-        <header className="bg-primary text-white" style={{height: '250px', padding: '20px 0 0 0'}}>
-          <div className="container text-center" >
-          <img src={require('../../assets/img/network2.png')} alt="red cross" className="logoImage" />
-          <div style={{paddingTop: '50px'}}>
-            <h1>JIT - IDPS</h1>
-            <p className="lead">
-              Safety in the palm of your hands
-            </p>
+
+        <header
+          className="bg-primary text-white"
+          style={{ height: "250px", padding: "20px 0 0 0" }}
+        >
+          <div className="container text-center">
+            <img
+              src={require("../../assets/img/network2.png")}
+              alt="red cross"
+              className="logoImage"
+            />
+            <div style={{ paddingTop: "50px" }}>
+              <h1>JIT - IDPS</h1>
+              <p className="lead">Safety in the palm of your hands</p>
             </div>
           </div>
         </header>
@@ -62,4 +76,3 @@ export default class Nav extends Component {
     );
   }
 }
-

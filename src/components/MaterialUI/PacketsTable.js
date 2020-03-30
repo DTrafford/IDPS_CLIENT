@@ -21,9 +21,6 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import PanToolIcon from "@material-ui/icons/PanTool";
 import FilterListIcon from "@material-ui/icons/FilterList";
 
-// function createData(srcIP) {
-//   return {srcIP};
-// }
 function createData(
   pcktNumber,
   srcIP,
@@ -68,14 +65,11 @@ const headCells = [
   { id: "pcktNum", numeric: false, disablePadding: true, label: "Pckt #" },
   { id: "srcIP", numeric: false, disablePadding: false, label: "Src IP" },
   { id: "srcPort", numeric: false, disablePadding: false, label: "Src Port" },
-  // { id: 'srcCountry', numeric: false, disablePadding: false, label: 'Src Country' },
   { id: "dstIp", numeric: false, disablePadding: false, label: "Dest IP" },
   { id: "dstPort", numeric: false, disablePadding: false, label: "Dst Port" },
-  // { id: 'dstCountry', numeric: false, disablePadding: false, label: 'Dst Country' },
   { id: "time", numeric: false, disablePadding: false, label: "Time" },
   { id: "proto", numeric: false, disablePadding: false, label: "Protocol" },
   { id: "flags", numeric: false, disablePadding: false, label: "Flags" }
-  // { id: 'flags', numeric: false, disablePadding: false, label: 'Flags' },
 ];
 
 function EnhancedTableHead(props) {
@@ -239,21 +233,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function PacketsTable(props) {
-  const rows = [
-    // createData('Cupcake', 305, 3.7, 67, 4.3),
-    // createData('Donut', 452, 25.0, 51, 4.9),
-    // createData('Eclair', 262, 16.0, 24, 6.0),
-    // createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    // createData('Gingerbread', 356, 16.0, 49, 3.9),
-    // createData('Honeycomb', 408, 3.2, 87, 6.5),
-    // createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    // createData('Jelly Bean', 375, 0.0, 94, 0.0),
-    // createData('KitKat', 518, 26.0, 65, 7.0),
-    // createData('Lollipop', 392, 0.2, 98, 0.0),
-    // createData('Marshmallow', 318, 0, 81, 2.0),
-    // createData('Nougat', 360, 19.0, 9, 37.0),
-    // createData('Oreo', 437, 18.0, 63, 4.0),
-  ];
+  const rows = [];
 
   props.packets.map(pckt => {
     rows.push(
@@ -269,7 +249,7 @@ export default function PacketsTable(props) {
       )
     );
   });
-  // console.log('ROWS = ', rows);
+
   const classes = useStyles();
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
@@ -326,7 +306,6 @@ export default function PacketsTable(props) {
     setDense(event.target.checked);
   }
 
-  // const isSelected = name => selected.indexOf(name) !== -1;
   const isSelected = index => {
     return selected.indexOf(index) !== -1;
   };

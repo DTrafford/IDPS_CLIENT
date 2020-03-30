@@ -48,19 +48,6 @@ export default class Nav2 extends Component {
                   STOP
                 </MDBBtn>
               </MDBNavItem>
-              {/* <MDBNavItem>
-                                <MDBDropdown>
-                                    <MDBDropdownToggle nav caret>
-                                        <MDBIcon icon="user" />
-                                    </MDBDropdownToggle>
-                                    <MDBDropdownMenu className="dropdown-default">
-                                        <MDBDropdownItem href="#!">Action</MDBDropdownItem>
-                                        <MDBDropdownItem href="#!">Another Action</MDBDropdownItem>
-                                        <MDBDropdownItem href="#!">Something else here</MDBDropdownItem>
-                                        <MDBDropdownItem href="#!">Something else here</MDBDropdownItem>
-                                    </MDBDropdownMenu>
-                                </MDBDropdown>
-                            </MDBNavItem> */}
             </MDBNavbarNav>
           </MDBCollapse>
         </MDBNavbar>
